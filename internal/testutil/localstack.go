@@ -19,7 +19,6 @@ func SetupLocalStack(ctx context.Context, version string) (*localstack.LocalStac
 	container, err := localstack.RunContainer(ctx, testcontainers.CustomizeRequest(
 		testcontainers.GenericContainerRequest{
 			ContainerRequest: testcontainers.ContainerRequest{
-				Image: "localstack/localstack:" + version,
 				HostConfigModifier: func(hostConfig *dockercontainer.HostConfig) {
 					hostConfig.AutoRemove = true
 				},
