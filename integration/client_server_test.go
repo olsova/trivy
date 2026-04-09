@@ -12,7 +12,6 @@ import (
 	"time"
 
 	dockercontainer "github.com/moby/moby/api/types/container"
-	"github.com/docker/go-connections/nat"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/testcontainers/testcontainers-go"
@@ -782,7 +781,7 @@ func setupRedis(t *testing.T, ctx context.Context) (testcontainers.Container, st
 	ip, err := redis.Host(ctx)
 	require.NoError(t, err)
 
-	p, err := redis.MappedPort(ctx, nat.Port(port))
+	p, err := redis.MappedPort(ctx, port)
 	require.NoError(t, err)
 
 	addr := fmt.Sprintf("redis://%s:%s", ip, p.Port())

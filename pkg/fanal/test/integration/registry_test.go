@@ -10,7 +10,6 @@ import (
 	"testing"
 
 	dockercontainer "github.com/moby/moby/api/types/container"
-	"github.com/docker/go-connections/nat"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/testcontainers/testcontainers-go"
@@ -199,7 +198,7 @@ func TestTLSRegistry(t *testing.T) {
 	}
 }
 
-func getRegistryURL(ctx context.Context, registryC testcontainers.Container, exposedPort nat.Port) (*url.URL, error) {
+func getRegistryURL(ctx context.Context, registryC testcontainers.Container, exposedPort string) (*url.URL, error) {
 	ip, err := registryC.Host(ctx)
 	if err != nil {
 		return nil, err
