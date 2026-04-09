@@ -16,7 +16,7 @@ func SetupLocalStack(ctx context.Context, version string) (*localstack.LocalStac
 		return nil, "", err
 	}
 
-	container, err := localstack.RunContainer(ctx, testcontainers.CustomizeRequest(
+	container, err := localstack.Run(ctx, "localstack/localstack:"+version, testcontainers.CustomizeRequest(
 		testcontainers.GenericContainerRequest{
 			ContainerRequest: testcontainers.ContainerRequest{
 				HostConfigModifier: func(hostConfig *dockercontainer.HostConfig) {
@@ -45,6 +45,6 @@ func SetupLocalStack(ctx context.Context, version string) (*localstack.LocalStac
 		return nil, "", err
 	}
 
-	return container, fmt.Sprintf("http://%s:%d", host, p.Int()), nil
+	return container, fmt.Sprintf("http://%s:%d", host, p.Num()), nil
 
 }
